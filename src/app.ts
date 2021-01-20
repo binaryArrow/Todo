@@ -12,7 +12,7 @@ export class App {
   todoDescription = ''
 
 
-  // TODO: take refresh todo array after new entry or deleting an entry
+  // TODO: edit, so if the todo is marked done, it's done property is true
   loadTodo(){
     fetch('http://localhost:8080/api/todos')
       .then(response => response.json())
@@ -37,7 +37,10 @@ export class App {
         body:raw
       })
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          console.log(data)
+          this.todos.push(data)
+        } )
       this.todoDescription = '';
     }
   }
