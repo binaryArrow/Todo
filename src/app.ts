@@ -1,17 +1,20 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
 
 interface Todo{
-  description: string;
-  done: boolean;
+  id: number
+  description: string
+  done: boolean
 }
 
 export class App {
-  heading = "Todos";
-  todos: Todo[] = [];
-  todoDescription = '';
+  heading = "Todos"
+  todos: Todo[] = []
+  todoDescription = ''
 
+
+  // TODO: take refresh todo array after new entry or deleting an entry
   loadTodo(){
-    fetch('http://localhost:8081/api/todos')
+    fetch('http://localhost:8080/api/todos')
       .then(response => response.json())
       .then(data => {
         data.forEach(function (it) {
@@ -19,18 +22,14 @@ export class App {
           console.log(it)
         }.bind(this))
       });
+    console.log(this.todos)
   }
 
   addTodo() {
     if (this.todoDescription) {
-      this.todos.push({
-        description: this.todoDescription,
-        done: false
-      });
-      const currentEntry = this.todos[this.todos.length-1]
-      var raw = JSON.stringify({"done":currentEntry.done,"description":currentEntry.description});
+      const raw = JSON.stringify({"done":false,"description":this.todoDescription});
 
-      fetch('http://localhost:8081/api/todos', {
+      fetch('http://localhost:8080/api/todos', {
         method:'POST',
         headers: {
           "Content-type":"application/json"
@@ -57,7 +56,7 @@ export class App {
     if (index !== -1) {
       this.todos.splice(index, 1)
 
-      fetch(`http://localhost:8081/api/${index}`, requestOptions)
+      fetch(`http://localhost:8080/api/todos/${todo.id}`, requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
