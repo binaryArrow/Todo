@@ -1,4 +1,3 @@
-import {HttpClient, json} from 'aurelia-fetch-client';
 
 interface Todo{
   id: number
@@ -12,7 +11,6 @@ export class App {
   todoDescription = ''
 
 
-  // TODO: edit, so if the todo is marked done, it's done property is true
   loadTodo(){
     fetch('http://localhost:8080/api/todos')
       .then(response => response.json())
@@ -43,6 +41,23 @@ export class App {
         } )
       this.todoDescription = '';
     }
+  }
+
+  // TODO: edit, so if the todo is marked done, it's done property is true
+  changeTodo(todo){
+      const requestOptions = {
+      method: 'PUT',
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({"done":todo.done, "description":todo.description})
+    };
+
+    fetch(`http://localhost:8080/api/todos/${todo.id}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    console.log(todo)
   }
 
 
