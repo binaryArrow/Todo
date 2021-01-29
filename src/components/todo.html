@@ -1,20 +1,22 @@
 <template>
-  <div>
+  <div class="form-and-ul">
     <form submit.trigger="addTodo()">
       <input type="text" value.bind="todoDescription">
       <button type="submit" disabled.bind="!todoDescription">Add Todo</button>
     </form>
 
-    <ul>
-      <li repeat.for="todo of todos">
-        <input type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
-        <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
-        ${todo.description}
-      </span>
+    <div class="list-of-todos">
+      <ul>
+        <li repeat.for="todo of todos">
+          <input type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
+          <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+            ${todo.description}
+          </span>
         <button click.trigger="removeTodo(todo)">Remove</button>
-      </li>
-    </ul>
-    ${loadTodo()}
+        </li>
+      </ul>
+      ${loadTodo()}
+    </div>
   </div>
 
 </template>
