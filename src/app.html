@@ -1,28 +1,7 @@
 <template>
+  <require from="./components/todo"></require>
   <h1>${heading}</h1>
-
-  <div>
-    <form submit.trigger="addTodo()">
-      <input type="text" value.bind="todoDescription">
-      <button type="submit" disabled.bind="!todoDescription">Add Todo</button>
-    </form>
-
-    <ul>
-      <li repeat.for="todo of todos">
-        <input type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
-        <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
-        ${todo.description}
-      </span>
-        <button click.trigger="removeTodo(todo)">Remove</button>
-      </li>
-    </ul>
-  </div>
-
-  <div class="list">
-    <div id="listLoad">
-      ${loadTodo()}
-    </div>
-  </div>
+  <todo></todo>
 </template>
 
 
