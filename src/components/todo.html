@@ -1,12 +1,12 @@
 <template>
   <div class="form-and-ul">
-    <form submit.trigger="addTodo()">
+    <form class="text-center form-group" submit.trigger="addTodo()">
       <input type="text" value.bind="todoDescription">
       <button type="submit" disabled.bind="!todoDescription">Add Todo</button>
     </form>
 
-    <div class="list-of-todos">
-      <ul>
+    <div class="ul-div">
+      <ul class="text-center list-group">
         <li repeat.for="todo of todos">
           <input type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
           <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">

@@ -35,7 +35,6 @@ export class Todo {
     }
   }
 
-  // TODO: edit, so if the todo is marked done, it's done property is true
   changeTodo(todo){
     const requestOptions = {
       method: 'PUT',
