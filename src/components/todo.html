@@ -1,18 +1,22 @@
 <template>
   <div class="form-and-ul">
     <form class="text-center form-group" submit.trigger="addTodo()">
-      <input type="text" value.bind="todoDescription">
-      <button type="submit" disabled.bind="!todoDescription">Add Todo</button>
+      <div class="input-group mb-3" style="margin-left: 15%">
+        <input type="text" placeholder="Todo..." value.bind="todoDescription">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary float-right" style="margin-right: 15px" disabled.bind="!todoDescription">Add Todo</button>
+        </div>
+      </div>
     </form>
 
     <div class="ul-div">
       <ul class="text-center list-group">
-        <li repeat.for="todo of todos">
-          <input type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
-          <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+        <li class="list-group-item" repeat.for="todo of todos">
+          <input class="float-left" style="width: 28px; height: 28px;" type="checkbox" checked.bind="todo.done" change.delegate="changeTodo(todo)">
+          <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}" style="font-size: large">
             ${todo.description}
           </span>
-        <button click.trigger="removeTodo(todo)">Remove</button>
+        <button class="btn btn-danger float-right" disabled.bind="!todo.done" click.trigger="removeTodo(todo)">Remove</button>
         </li>
       </ul>
       ${loadTodo()}
