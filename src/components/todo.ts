@@ -2,9 +2,10 @@ export class Todo {
   heading = "Todos"
   todos: Todo[] = []
   todoDescription = ''
+  path = 'http://localhost:8080'
 
   loadTodo(){
-    fetch('http://localhost:8080/api/todos')
+    fetch(`${this.path}/api/todos`)
       .then(response => response.json())
       .then(data => {
         data.forEach(function (it) {
@@ -19,7 +20,7 @@ export class Todo {
     if (this.todoDescription) {
       const raw = JSON.stringify({"done":false,"description":this.todoDescription});
 
-      fetch('http://localhost:8080/api/todos', {
+      fetch(`${this.path}/api/todos`, {
         method:'POST',
         headers: {
           "Content-type":"application/json"
@@ -44,7 +45,7 @@ export class Todo {
       body: JSON.stringify({"done":todo.done, "description":todo.description})
     };
 
-    fetch(`http://localhost:8080/api/todos/${todo.id}`, requestOptions)
+    fetch(`${this.path}/api/todos/${todo.id}`, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -65,7 +66,7 @@ export class Todo {
     if (index !== -1) {
       this.todos.splice(index, 1)
 
-      fetch(`http://localhost:8080/api/todos/${todo.id}`, requestOptions)
+      fetch(`${this.path}/api/todos/${todo.id}`, requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
